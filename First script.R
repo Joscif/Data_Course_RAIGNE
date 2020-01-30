@@ -31,3 +31,4 @@ plot(y=Loblolly$height,x=Loblolly$age,col=Loblolly$Seed,
 plot(x=Loblolly$Seed,y=Loblolly$height)
 table(Loblolly$Seed,Loblolly$age)
 plot(x=Loblolly$Seed,y=Loblolly$age)
+
