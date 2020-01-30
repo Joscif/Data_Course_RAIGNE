@@ -18,7 +18,7 @@ list.files()
 
 dat = read.csv("./Data/thatch_ant.csv")
 names(dat) 
-setwd("../Data_Course")
+setwd("../../../Data_Course")
 getwd()
 class(dat$Size.class)
 
@@ -39,15 +39,19 @@ str(dat)
 
 # Two of them are "Factor" ....why is the column "Headwidth" a factor? It looks numeric!
 #Answere: factor data is stored numerically in R but the value is catagorical data not numeric data.
-#Answere: ants with headwiths of specific mm are catagorized catigorically with assigned numbers, ie 43.000.
+#Answere: ants with headwiths of specific mm are catagorized catigorically with assigned numbers, ie 43.000. 
+#Answere: this is all because there was a data point in headwidth that was entered in with"" thus R made whole column factor instead of numeric data.
 
 # we can try to coerce one format into another with a family of functions
 # as.factor, as.matrix, as.data.frame, as.numeric, as.character, as.POSIXct, etc.... 
-# these as.funtions only show as new data class but does not change, so one must assigne output to new vector!!!
+# note-these as.funtions only show as new data class but does not change, so one must assigne output to new vector!!!
 
 #make a numeric vector to play with:
 nums = c(1,1,2,2,2,2,3,3,3,4,4,4,4,4,4,4,5,6,7,8,9)
 class(nums) # make sure it's numeric
+
+
+
 
 # convert to a factor
 as.factor(nums) # show in console
@@ -61,14 +65,19 @@ plot(nums_factor)
 
 # Let's modify and save these plots. Why not!?
 ?plot()
-plot(nums, main = "My Title", xlab = "My axis label", ylab = "My other axis label")
+plot(nums, main = "numeric data", xlab = "number position", ylab = "value of number")
+plot(nums_factor, main = "numeric data and factor", xlab = "number", ylab = "qauntiity of number")
 
-
-?jpeg()
-
+jpeg("factor_vs_numerical_data_plot1.jpeg")
+plot(nums, main = "numeric data", xlab = "number position", ylab = "value of number")
 
 dev.off()
+getwd()
 
+jpeg("factor_vs_numerical_data_plot2.jpeg")
+plot(nums_factor, main = "numeric data and factor", xlab = "number", ylab = "qauntiity of number")
+
+dev.off()
 
 
 # back to our ant data...
@@ -80,22 +89,30 @@ levels(dat$Headwidth) # levels gives all the "options" of a factor you feed it
                                             # It should probably be "41.000"
 
 # FIND WHICH ONES HAVE "41mm"
+which(dat$Headwidth == "41mm")
 
 
 
 # CONVERT THOSE TO "41.000"
 
-
+dat$Headwidth[1031] = "41.000"
 
 # DO THE SAME FOR "", BUT CONVERT THOSE TO "NA"
 
+which(dat$Headwidth == "")
+dat$Headwidth[546] = "NA"
+dat$Headwidth[629] = "NA"
+dat$Headwidth[724] = "NA"
+dat$Headwidth[1140] = "NA"
 
 
 # NOW, REMOVE ALL THE ROWS OF "dat" THAT HAVE AN "NA" VALUE
-na.omit(dat)
+dat2<- na.omit(dat)
 
 
 # NOW, CONVERT THAT PESKY "Headwidth" COLUMN INTO A NUMERIC VECTOR WITHIN "dat"
+data_clean$Headwidth <- as.numeric(data_clean$Headwidth)
+str(data_clean)
 
 
 
@@ -115,8 +132,8 @@ df1 # look at it...note column names are what we gave it.
 
 # Make a data frame from the first 20 rows of the ant data that only has "Colony" and "Mass"
 # save it into an object called "dat3"
-
-
+df_ant <- filter()
+dat3 <- data_clean[1:20, c("Colony", "Mass")] 
 
 
 
@@ -125,9 +142,12 @@ df1 # look at it...note column names are what we gave it.
 
 
 # Write your new object "dat3" to a file named "LASTNAME_first_file.csv" in your PERSONAL git repository
+# Export the data. The write.csv() function requires a minimum of two
+# arguments, the data to be saved and the name of the output file.
 
-
-
+write.csv(dat3, file = "RAIGNE_first_file.csv")
+getwd()
+setwd("../Data_Course_RAIGNE/Assignments/Assignment_3/")
 
 ### for loops in R ###
 
@@ -137,6 +157,7 @@ for(i in 1:10){
 }
 
 #another easy one
+
 for(i in levels(dat$Size.class)){
   print(i)
 }
@@ -176,10 +197,16 @@ size_class_mean_mass = data.frame(...)
 ############ YOUR HOMEWORK ASSIGNMENT ##############
 
 # 1.  Make a scatterplot of headwidth vs mass. See if you can get the points to be colored by "Colony"
+plot(y=dat2$Headwidth, x=dat2$Mass, col=dat2$Colony, 
+     pch=19, main = "assignment 3 plot", xlab = "ant mass", ylab = "ant head width")
 
 
 # 2.  Write the code to save it (with meaningful labels) as a jpeg file
-
+jpeg("Assignment_3_plot.jpeg")
+plot(y=dat2$Headwidth, x=dat2$Mass, col=dat2$Colony, 
+     pch=19, main = "assignment 3 plot", xlab = "ant mass", ylab = "ant head width")
+dev.off()
+getwd()
 
 # 3.  Subset the thatch ant data set to only include ants from colony 1 and colony 2
 
