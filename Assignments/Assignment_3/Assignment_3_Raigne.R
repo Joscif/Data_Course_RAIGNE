@@ -1,7 +1,7 @@
 # Assignment Week 3
 
 
-
+library(tidyverse)
 
 # topics:   type conversions, factors, plot(), making a data frame from "scratch",
 #           reordering, 
@@ -16,10 +16,10 @@ vector1*vector2
 
 list.files()
 
-dat = read.csv("./Data/thatch_ant.csv")
+dat = read.csv("../../Data/thatch_ant.csv")
+
+
 names(dat) 
-setwd("../../../Data_Course")
-getwd()
 class(dat$Size.class)
 
 #why are these plots different???
@@ -72,7 +72,7 @@ jpeg("factor_vs_numerical_data_plot1.jpeg")
 plot(nums, main = "numeric data", xlab = "number position", ylab = "value of number")
 
 dev.off()
-getwd()
+
 
 jpeg("factor_vs_numerical_data_plot2.jpeg")
 plot(nums_factor, main = "numeric data and factor", xlab = "number", ylab = "qauntiity of number")
@@ -89,21 +89,19 @@ levels(dat$Headwidth) # levels gives all the "options" of a factor you feed it
                                             # It should probably be "41.000"
 
 # FIND WHICH ONES HAVE "41mm"
-which(dat$Headwidth == "41mm")
+dat$Headwidth == "41mm"
+bad41 <- which(dat$Headwidth == "41mm")
 
 
 
 # CONVERT THOSE TO "41.000"
 
-dat$Headwidth[1031] = "41.000"
+dat$Headwidth[bad41] = "41.000"
 
 # DO THE SAME FOR "", BUT CONVERT THOSE TO "NA"
 
-which(dat$Headwidth == "")
-dat$Headwidth[546] = "NA"
-dat$Headwidth[629] = "NA"
-dat$Headwidth[724] = "NA"
-dat$Headwidth[1140] = "NA"
+badvalues <- which(dat$Headwidth == "")
+dat$Headwidth[badvalues] <- NA
 
 
 # NOW, REMOVE ALL THE ROWS OF "dat" THAT HAVE AN "NA" VALUE
@@ -111,10 +109,14 @@ dat2<- na.omit(dat)
 
 
 # NOW, CONVERT THAT PESKY "Headwidth" COLUMN INTO A NUMERIC VECTOR WITHIN "dat"
-data_clean$Headwidth <- as.numeric(data_clean$Headwidth)
-str(data_clean)
+as.numeric(as.character(dat2$Headwidth)) #reads in outward
+dat2$Headwidth <- dat2$Headwidth %>% as.character() %>% as.numeric()#same thing
 
+str(dat2)
 
+unique(dat2$Headwidth)
+
+plot(dat2$Headwidth,dat2$Mass)
 
 # LET'S LEARN HOW TO MAKE A DATA FRAME FROM SCRATCH... WE JUST FEED IT VECTORS WITH NAMES!
 
@@ -132,8 +134,8 @@ df1 # look at it...note column names are what we gave it.
 
 # Make a data frame from the first 20 rows of the ant data that only has "Colony" and "Mass"
 # save it into an object called "dat3"
-df_ant <- filter()
-dat3 <- data_clean[1:20, c("Colony", "Mass")] 
+
+dat3 <- dat2[1:20, c("Colony", "Mass")] 
 
 
 
@@ -146,8 +148,13 @@ dat3 <- data_clean[1:20, c("Colony", "Mass")]
 # arguments, the data to be saved and the name of the output file.
 
 write.csv(dat3, file = "RAIGNE_first_file.csv")
-getwd()
-setwd("../Data_Course_RAIGNE/Assignments/Assignment_3/")
+
+#get mean
+
+under_30mass <- dat2 %>% filter (Size.class == "<30") %>%
+  select(Mass) 
+
+mean(under_30mass$Mass)
 
 ### for loops in R ###
 
@@ -161,10 +168,11 @@ for(i in 1:10){
 for(i in levels(dat$Size.class)){
   print(i)
 }
+levels(dat$Size.class)
 
 # can calculate something for each value of i ...can use to subset to groups of interest
-for(i in levels(dat$Size.class)){
-  print(mean(dat[dat$Size.class == i,"Mass"]))
+for(i in levels(dat2$Size.class)){
+  print(mean(dat2[dat2$Size.class == i,"Mass"]))
 }
 
 # more complex:
@@ -173,11 +181,12 @@ new_vector = c() # it's empty
 # also define a counter
 x = 1
 
-for(i in levels(dat$Size.class)){
-  new_vector[x] = mean(dat[dat$Size.class == i,"Mass"])
+for(i in levels(dat2$Size.class)){
+  new_vector[x] = mean(dat2[dat2$Size.class == i,"Mass"])
   x = x+1 # add 1 to the counter (this will change the element of new_vector we access each loop)
 }
-  
+
+str(dat2)  
 #check it
 new_vector
 
@@ -188,11 +197,13 @@ new_vector
 # SECOND COLUMN WILL BE NAMED "MEAN" AND WILL BE VALUES FROM  new_vector
 
 #fill it in
-size_class_mean_mass = data.frame(...)
+size_class_mean_mass = data.frame(Size_Class =levels(dat2$Size.class),
+                                  MEAN = new_vector)
 
-
-
-
+size_class_mean_mass
+# IMMPORTANT
+dat2summary <- dat2 %>% group_by(Size.class) %>%  
+  summarise(MEAN =mean(Mass), Second = mean(Headwidth), medianheadwidth = median(Headwidth))
 
 ############ YOUR HOMEWORK ASSIGNMENT ##############
 
@@ -211,7 +222,12 @@ getwd()
 # 3.  Subset the thatch ant data set to only include ants from colony 1 and colony 2
 
 
+dat12 <- dat2 %>% filter(Colony %in% c(1,2))
+
+
+
 # 4.  Write code to save this new subset as a .csv file
+write.csv(dat12, file = "./ant_colony12.csv")
 
 
 # 5.  Upload this R script (with all answers filled in and tasks completed) to canvas
