@@ -217,7 +217,7 @@ jpeg("Assignment_3_plot.jpeg")
 plot(y=dat2$Headwidth, x=dat2$Mass, col=dat2$Colony, 
      pch=19, main = "assignment 3 plot", xlab = "ant mass", ylab = "ant head width")
 dev.off()
-getwd()
+
 
 # 3.  Subset the thatch ant data set to only include ants from colony 1 and colony 2
 
