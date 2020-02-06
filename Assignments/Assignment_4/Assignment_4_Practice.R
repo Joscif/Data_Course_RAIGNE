@@ -1,8 +1,8 @@
 ?read.table() #This brings up the help file
 df = read.csv("../../Data/landdata-states.csv") # why did I change to read.csv ???
-
+names(df)[4] 
 class(df) # what type of object is df?
-
+plot(x=df$Year,y=df$Land.Value,col=df$region)
 head(df) # shows the first 6 elements of an object (first 6 rows if you give it a data frame)
  getwd()
  
