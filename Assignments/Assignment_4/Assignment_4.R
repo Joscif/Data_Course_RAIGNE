@@ -18,6 +18,7 @@ str(MP1)
  
 plot(x=MP1$Ecosystem, y=MP1$Lat)
 getwd()
+
 png(filename = "silly_boxplot.png")
 plot(x=MP1$Ecosystem, y=MP1$Lat)
 dev.off()

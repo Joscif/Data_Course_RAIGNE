@@ -39,6 +39,7 @@ ggplot(midwest, aes(x=area, y=poptotal))  # area and poptotal are columns in 'mi
 
 # Give it a geom to map to your defined aesthetics... Basic Scatterplot, in this case:
 ggplot(midwest, aes(x=area, y=poptotal)) + geom_point() # The "+" tells ggplot to add another layer to our base plot
+getwd()
 
 # Add another geom ... a trendline:
 ggplot(midwest, aes(x=area, y=poptotal)) + geom_point() + geom_smooth(method = "lm")
@@ -48,8 +49,9 @@ ggplot(midwest, aes(x=area, y=poptotal)) + geom_point() + geom_smooth(method = "
 p <- ggplot(midwest, aes(x=area, y=poptotal)) + geom_point() + geom_smooth(method = "lm")
 
 # Zoom in
-p + lims(x=c(0,0.1),y=c(0,1000000)) # what did this do?
-p + coord_cartesian(xlim=c(0,0.1), ylim=c(0, 1000000)) # how is this different?
+p + lims(x=c(0,0.1),y=c(0,1000000)) # what did this do? zooms in on x and y cordinates based on values intered
+
+p + coord_cartesian(xlim=c(0,0.1), ylim=c(0, 1000000)) # how is this different? causes outliers to be included??
 
 # Store this new zoomed-in plot
 p2 <- p + coord_cartesian(xlim=c(0,0.1), ylim=c(0, 1000000))
@@ -102,7 +104,7 @@ pal = c("#c4a113","#c1593c","#643d91","#820616","#477887","#688e52",
         "#12aa91","#705f36","#8997b2","#753c2b","#3c3e44","#b3bf2d",
         "#82b2a4","#894e7d","#a17fc1","#262a8e","#abb5b5","#000000")
 palette_plot(pal)
-# You can even check to see if your color choices would work for someone who has colorblindness...
+# You can even check to see if your color choices would work for someone who has colorblindness...????
 cvd_grid(palette_plot(pal))
 
 # Our plot with my custom color palette
@@ -145,6 +147,7 @@ p5 + geom_bar(stat="identity") # something wrong with this picture!
 
 
 # Geoms for looking at a single variable's distribution:
+library(carData)
 data("MplsStops")
 
 ggplot(MplsStops, aes(x=lat)) + geom_histogram() + labs(title = "Latitude of police stops in Minneapolis - 2017")
