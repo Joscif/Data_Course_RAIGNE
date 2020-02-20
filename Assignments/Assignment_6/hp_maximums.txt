@@ -1,0 +1,6 @@
+[1] "original max hp"
+[1] 335
+[1] "auto.tran max hp"
+[1] 245
+[1] "disp max hp"
+[1] 175
