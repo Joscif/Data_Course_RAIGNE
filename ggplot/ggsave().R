@@ -48,7 +48,8 @@ ggplot(mtcars, aes(x=disp,y=mpg))+
   
   
   arrange()
-group_by()
+group_  scale_color_gradient(low="Blue",high="Red")+
+by()
 select()
 mutate(mtcars,DIFF=mpg-resids)
 
@@ -59,7 +60,6 @@ glimpse(df)
 
 ggplot(df, aes(x=Nitrogen,y=GrowthRate, color=Light))+
   geom_point()+geom_smooth(method="lm",formula=y~poly(x,2))+facet_wrap(~Species)+
-  scale_color_gradient(low="Blue",high="Red")+
 theme(strip.text = element_text(face="italic"))
 
 mod2 <- lm(data=df, GrowthRate~poly(Nitrogen,2))
