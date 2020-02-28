@@ -55,7 +55,7 @@ ggsave("./RAIGNE_Fig_2.jpg", device="png", dpi=300,width = 7, height = 6)
 # (i.e., all countries in each continent, yearly average), this is NOT a geom_smooth() 
 # Export it to your Exam_2 folder as LASTNAME_Fig_3.jpg (note, that's a jpg, not a png)
 
-ggplot(tidyuni, aes(x= Year,y=MortalityRate, color=Continent))+
+p3 <- ggplot(tidyuni, aes(x= Year,y=MortalityRate, color=Continent))+
   stat_summary(fun.y="mean",geom = "line", size=2.5)+
   theme_minimal()+ labs(y= "Mean Mortality Rate(deaths per 1000 live births)")
 
