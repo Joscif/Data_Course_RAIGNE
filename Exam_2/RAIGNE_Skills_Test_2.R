@@ -9,6 +9,7 @@ p1 <- ggplot(df1,aes(x=Year,y=Land.Value, color=region))+
   scale_color_discrete("Region")+
   theme_minimal()+
   labs(y="Land Value (USD)")
+#color= region may be used also to change legend title
 
 ggsave("./RAIGNE_Fig_1.jpg", device="png", dpi=300, height = 6, width = 7)
 str(df1)
@@ -20,6 +21,7 @@ df2 <- subset(df1, is.na(df1$region))
 df2[,1:2]
 #or
 #Changed NA to Mid-Atlantic, this is the region that google said DC is in.
+#dat[which(is.na)]
 dfDC[is.na(dfDC)]="Mid-Atlantic"
 
 newDC<- filter(dfDC, region=="Mid-Atlantic")
@@ -27,6 +29,7 @@ newDC[,1:2]
 
 # III.    The rest of the test uses another data set. The unicef-u5mr.csv data. 
 # It's not exactly tidy. You had better tidy it!
+# anothe way long <- gather(dat,key=Year,value= Mortality,2:67)
 
 uni<- read.csv("./unicef-u5mr.csv")
 
