@@ -1,0 +1,22 @@
+---
+title: "First Mark down"
+author: "Raigne"
+date: "3/10/2020"
+output: html_document
+---
+
+This is plot of score distributions data about 1620 scores
+```{r echo=FALSE, warning=F, message=F}
+library(tidyverse)
+library(plotly)#interactive plots
+df<- read.csv("../Data/1620_scores.csv")
+glimpse(df)
+
+ggplot(df, aes(x=Exam.1..4245260.))+geom_histogram()
+```
+
+**BOLD** text
+*italic*
+markdown table generator 
+___
+line spacer
