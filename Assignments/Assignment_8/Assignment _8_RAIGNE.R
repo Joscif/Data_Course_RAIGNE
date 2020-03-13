@@ -27,12 +27,12 @@ str(df)
 # • Count: Log-Linear model
 # • Binary: Binary logistic
 
-mod1 <- lm(data = df, formula = GrowthRate ~Light)
+mod1 <- ulm(data = df, formula = GrowthRate ~(Nitrogen*Light)+Temperature)
 
 summary(mod1)
 plot()
 
-mod2 <- aov(data = df, formula = GrowthRate ~ Nitrogen)
+mod2 <- aov(data = df, formula = GrowthRate ~ Light* Temperature)
 
 df$Light <- as.numeric(as.character(df$Light))
 # 4. calculates the mean sq. error of each model
@@ -60,6 +60,25 @@ P1 <- add_predictions(df, mod1) %>%
   geom_point((aes(y=pred, color="Red")))+
            labs (title = "TEMP VS LIGHT")
 P1
+
+set.seed(123) # set reproducible random number seed
+set <- caret::createDataPartition(df$GrowthRate, p=.5) # pick random subset of data 
+set <- set$Resample1 # convert to vector
+
+train <- df[set,] # subset mtcars using the random row numbers we made
+test <- df[-set,] # The other half of the mtcars
+
+# build our best iris model (mod3, from above)
+formula(mod1)
+mod1_cv <- lm(data=train, formula = formula(mod1))
+test <- add_predictions(test,mod1_cv)
+
+ggplot(test,aes(x=Nitrogen,color=Light)) +
+  geom_point(aes(y=GrowthRate),alpha=.25) +
+  geom_point(aes(y=pred),shape=5)
+
+
+
 
 # • Upload responses to the following as a numbered plaintext document to Canvas:
 #   1. Are any of your predicted response values from your best model scientifically meaningless? Explain.
