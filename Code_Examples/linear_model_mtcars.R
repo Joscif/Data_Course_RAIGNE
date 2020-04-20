@@ -87,7 +87,7 @@ ggplot(cartest,aes(x=hp,color=wt)) +
 
 
 # compare MSE from our over-fitted model to the cross-validated one
-testedresiduals <- (mtcars$pred - cartest$mpg)
+testedresiduals <- (cartest$pred - cartest$mpg)
 
 mod3mse # our original MSE
 mean(testedresiduals^2) # our cross-validated model
