@@ -1,0 +1,21 @@
+DNAMultipleAlignment with 19 rows and 654 columns
+      aln                                                              names               
+ [1] ----CGTGACCCCGACCAAAACAGACCGCGA...AG---------------------------- Oryza_eichingeri
+ [2] ---TCGTGACCCTGACCAAAACAGACCGCGA...AG---------------------------- Oryza_punctata_clone
+ [3] ---TCGTGACCCTGACCAAAACAGACCGCGA...AG---------------------------- Oryza_malampuzhae...
+ [4] ----CGTGACCCTGACCAAAACAGACCGCGA...AG---------------------------- Oryza_minuta
+ [5] ---TCGTGACCCTGACCAAAACAGACCGCGA...AGAGCGAACGCCTCGGACC----------- Oryza_rufipogon
+ [6] ----CGTGGCCCTGACCAAAACAGACCGCGA...AG---------------------------- Oryza_alta
+ [7] ---TCGTGACCCTGACCAAAACAGACCGCGA...AGCGCACGCTCGGACC-------------- Oryza_punctata
+ [8] ---TCGTGACCCTGACCAAAACAGACCGCGA...AGAGCGAACGCCTCGGACC----------- Oryza_nivara
+ [9] ---TCGTGACCCTGACCAAAACAGACCGCGA...AGAGCGAACGCCTCGGACC----------- Oryza_glaberrima
+[10] TTGTCGTGACCCTGACCAAAACAGACCGCGA...AGAGCGAACGCCTCGGACCGCGACCCCAGG Oryza_barthii
+[11] ---TCGTGACCCTGACCAAAACAGACCGCGA...AGAGCGAACGCCTCGGACC----------- Oryza_glumipatula
+[12] ----CGTGACCCTAACCAAAACATACCGCGA...------------------------------ Oryza_officinalis
+[13] -------------------------------...AG---------------------------- Oryza_grandiglumis
+[14] -------------------------------...AG---------------------------- Oryza_latifolia
+[15] -------------------------------...------------------------------ Leersia_hexandra
+[16] ---TCGTGACCCTGACCAAAACAGACCGCGA...AGAGCGAACGCCTCGGACC----------- Oryza_longistaminata
+[17] ---TCGTGACCCTGACCAAAACAGACCGCGA...AGACGCCCCCCCGTGGCTCGGACC------ Oryza_granulata
+[18] --GTCGTGACCCTGACCAAAACAGACCGCGA...AGAGCGAACGCCTCGGACC----------- Oryza_sativa_isol...
+[19] ---TCGTGACCCTGAC--CAAAACAGACCGC...CCCGGCGCGC-GGCCGGCGCAGCGGCCCCT Leersia_japonica
